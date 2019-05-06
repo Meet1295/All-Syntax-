@@ -1,0 +1,19 @@
+   post(params: DictData, url: "User/UserLogin") { (succeeded: Bool, Response: NSDictionary) in
+                        DispatchQueue.main.async {
+                            if(succeeded) {
+                                let StrAvail1:NSArray = Response.allKeys as NSArray
+                                
+                                if StrAvail1 .contains("issuccess"){
+                                    let LoginStatus = Response["issuccess"] as! Bool
+                                    print(Response)
+                                    }
+                                    }
+                                    
+                                    }
+                                     Get_String(url: "RoomAssign/PostUserExist?Phone=\(TxtMobile.text!)") { (succeeded: Bool, Response: NSDictionary) in
+                DispatchQueue.main.async {
+                    if(succeeded) {
+                        
+                        let StrAvail1:NSArray = Response.allKeys as NSArray
+                        
+                        if StrAvail1 .contains("issuccess"){

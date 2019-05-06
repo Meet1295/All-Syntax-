@@ -1,0 +1,25 @@
+ func uploadProfileImages(selectedImg : UIImage , Hight:Int , width :Int) {
+
+        var params =  [String:AnyObject]()
+        params["iUserId"] = String.getUserDetails(type: .userId) as AnyObject
+        params["vLoginToken"] = String.getUserDetails(type: .usertoken) as AnyObject
+        params["width"] = width as AnyObject
+        params["height"] = Hight as AnyObject
+        params["vImage"] =  UIImageJPEGRepresentation(selectedImg, 0.6) as AnyObject
+        
+        
+        APIRequest.doRequestForDecodable(decodablClass: ProfileFeed.self, method: .POST, queryString:"profileimages" , parameters: params) { (decodable, error) in
+            if let decodableValue = decodable{
+                self.arrProfileData = decodableValue
+                DispatchQueue.main.async{
+                    if (self.arrProfileData?.data.count)! > 0{
+                        let cellAttribute = self.arrProfileData?.data[self.index]
+                        if let val = cellAttribute?.vImage {
+                            self.imgProfile?.imageFromServerURL(urlString: val)
+                        }
+                    }
+                    self.collectionView.reloadData()
+                }
+            }
+        }
+    }

@@ -1,0 +1,8 @@
+ func deleteImages(selectedProfileId : String , selectedIndex : Int) {
+
+        var params =  [String:AnyObject]()
+        params["vLoginToken"] = String.getUserDetails(type: .usertoken) as AnyObject
+        params["iProfileId"] = selectedProfileId as AnyObject
+
+        APIRequest.doRequestForJson(method: .POST, queryString: "deleteprofileimage", parameters: params, showLoading: true, returnError: true) { (obj) in
+            if let json = obj as? [String:AnyObject] {}}
